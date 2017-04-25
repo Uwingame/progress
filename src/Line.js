@@ -27,9 +27,17 @@ class Line extends Component {
 
     const center = strokeWidth / 2;
     const right = 100 - (strokeWidth / 2);
-    const pathString =
-          `M ${strokeLinecap === 'round' ? center : 0},${center}
+    const htmlIsRtl = (document.getElementsByTagName("html")[0].getAttribute("dir") == 'rtl');
+    
+    const pathString = null;
+    if (htmlIsRtl) {
+      pathString = `M ${strokeLinecap === 'round' ? right : 0},${center}
+           L -${strokeLinecap === 'round' ? right : 100},${center}`;
+    } else {
+      pathString = `M ${strokeLinecap === 'round' ? center : 0},${center}
            L ${strokeLinecap === 'round' ? right : 100},${center}`;
+    }
+    
     const viewBoxString = `0 0 100 ${strokeWidth}`;
 
     return (
